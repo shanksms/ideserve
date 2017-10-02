@@ -23,6 +23,8 @@ def post_order_traversal(root):
          post_order_traversal(root.right)
     print(root.data, end=' ')
 def level_order_traversal(root):
+    if root is None:
+        return
     level_elements_dict = {}
     level_order_traversal_helper(root, 0, level_elements_dict)
     for key, value in level_elements_dict.items():
@@ -39,6 +41,19 @@ def level_order_traversal_helper(root, level, level_elements_dict):
         level_order_traversal_helper(root.left, level + 1, level_elements_dict)
     if root.right != None:
         level_order_traversal_helper(root.right, level + 1, level_elements_dict)
+
+def level_order_traversal_using_queue(root):
+    if root is None:
+        return
+    queue = []
+    queue.append(root)
+    while len(queue) > 0:
+        print(queue[0].data, end=' ')
+        node = queue.pop(0)
+        if node.left is not None:
+            queue.append(node.left)
+        if node.right is not None:
+            queue.append(node.right)
 
 
 
@@ -61,5 +76,5 @@ if __name__ == '__main__':
     #print()
     #post_order_traversal(root)
     #print()
-    level_order_traversal(root)
+    level_order_traversal_using_queue(root)
     print()
